@@ -1,0 +1,5 @@
+* create few listener classes - i.e. onDeath(List<Ped>) - true when event occurred on any of 
+* minion's death
+* extend ActionType to create monster specific states
+* change buff API not to modify attack value, it has to add it in getter.
+* create stable minion API, connect it with groovy scripting - creating classes.
