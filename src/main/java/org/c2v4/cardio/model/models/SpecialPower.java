@@ -1,7 +1,6 @@
-package org.c2v4.cardbot.model.models;
+package org.c2v4.cardio.model.models;
 
 import org.c2v4.cardbot.model.Board;
-import org.c2v4.cardbot.model.Ped;
 
 public interface SpecialPower {
 

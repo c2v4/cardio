@@ -1,25 +1,24 @@
-package org.c2v4.kardio.model;
-
-import java.util.Set;
+package org.c2v4.cardio.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+import org.c2v4.cardio.model.models.Ped;
 import org.c2v4.kardio.action.Action;
 import org.c2v4.kardio.action.Action.ActionType;
 import org.c2v4.kardio.action.Activity;
-import org.c2v4.kardio.model.models.Ped;
+
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class Player extends Ped {
     private static final int PLAYERS_STARTING_HEALTH = 30;
+    private final Classes clazz;
     @Setter
     @Getter
     private int armorValue;
-    private final Classes clazz;
 
     public Player(final Classes clazz, final Side side) {
         this.side = side;
@@ -37,11 +36,6 @@ public class Player extends Ped {
         if (restValue > 0) {
             super.damage(restValue);
         }
-    }
-
-    public enum Side {
-        PLAYER,
-        OPPONENT
     }
 
     @SuppressWarnings("unchecked")
@@ -64,5 +58,10 @@ public class Player extends Ped {
     public boolean attack(final Ped target) {
         // TODO Auto-generated method stub weapon and stuff
         return false;
+    }
+
+    public enum Side {
+        PLAYER,
+        OPPONENT
     }
 }

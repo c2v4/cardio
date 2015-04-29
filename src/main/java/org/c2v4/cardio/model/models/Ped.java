@@ -1,22 +1,21 @@
-package org.c2v4.kardio.model.models;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package org.c2v4.cardio.model.models;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+import org.c2v4.cardio.model.Player.Side;
 import org.c2v4.kardio.action.Action;
 import org.c2v4.kardio.action.Activity;
 import org.c2v4.kardio.action.Activity.TargetType;
 import org.c2v4.kardio.model.Board;
 import org.c2v4.kardio.model.Damageable;
 import org.c2v4.kardio.model.Entity;
-import org.c2v4.kardio.model.Player.Side;
 import org.c2v4.kardio.model.buffs.Buff;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Setter
 @Getter
