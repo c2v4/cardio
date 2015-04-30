@@ -52,7 +52,7 @@ public class Action<S extends Ped, T extends Entity> {
         private Set<ActionType> actionTypes = EnumSet.noneOf(ActionType.class);
         private Action cause;
 
-        public Builder(Board board, Activity activity) {
+        public Builder(Board board, Activity<S, T> activity) {
             this.board = board;
             this.activity = activity;
 

@@ -34,30 +34,41 @@ public abstract class Ped extends Entity implements Damageable {
     
     public void play(){
         getBoard().resolveAction(
-                new Action<>(this, null, getBoard(),
-                        new Activity<Ped, Entity>(Activity.TargetType.BOARD) {
-
-                            @Override
-                            public void act(final Board board,
-                                            final Ped source, final Entity target) {
-                                board.removeMinion(source);
-
-                            }
-                        }, null));
+                new Action.Builder<Ped, Entity>(getBoard(), new Activity(Activity.TargetType.BOARD) {
+                    @Override
+                    public void act(Board board, Ped source, Entity target) {
+                        //TODO: adding a minion to board
+                    }
+                }).setSource(this).build());
+//                new Action<>(this, null, getBoard(),
+//                        new Activity<Ped, Entity>(Activity.TargetType.BOARD) {
+//
+//                            @Override
+//                            public void act(final Board board,
+//                                            final Ped source, final Entity target) {
+//                                board.removeMinion(source);
+//
+//                            }
+//                        }, null));
     }
     
     private void died() {
-        getBoard().resolveAction(
-                new Action<Ped, Entity>(this, null, getBoard(),
-                        new Activity<Ped, Entity>(Activity.TargetType.BOARD) {
-
-                            @Override
-                            public void act(final Board board,
-                                    final Ped source, final Entity target) {
-                                board.removeMinion(source);
-
-                            }
-                        }, null));
+        getBoard().resolveAction(new Action.Builder<Ped, Entity>(getBoard(), new Activity(Activity.TargetType.BOARD) {
+            @Override
+            public void act(Board board, Ped source, Entity target) {
+                //TODO: minion dying
+            }
+        }).setSource(this).build());
+//                new Action<Ped, Entity>(this, null, getBoard(),
+//                        new Activity<Ped, Entity>(Activity.TargetType.BOARD) {
+//
+//                            @Override
+//                            public void act(final Board board,
+//                                    final Ped source, final Entity target) {
+//                                board.removeMinion(source);
+//
+//                            }
+//                        }, null));
     }
 
     protected boolean checkForDeath(final int modifiedHealth) {
