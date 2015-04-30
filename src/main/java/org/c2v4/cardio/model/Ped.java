@@ -1,16 +1,13 @@
-package org.c2v4.cardio.model.models;
+package org.c2v4.cardio.model;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.c2v4.cardio.controller.Board;
 import org.c2v4.cardio.model.Player.Side;
-import org.c2v4.kardio.action.Action;
-import org.c2v4.kardio.action.Activity;
-import org.c2v4.kardio.action.Activity.TargetType;
-import org.c2v4.kardio.model.Board;
-import org.c2v4.kardio.model.Damageable;
-import org.c2v4.kardio.model.Entity;
-import org.c2v4.kardio.model.buffs.Buff;
+import org.c2v4.cardio.model.action.Action;
+import org.c2v4.cardio.model.action.Activity;
+import org.c2v4.cardio.model.buffs.Buff;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,12 +35,12 @@ public abstract class Ped extends Entity implements Damageable {
     
     public void play(){
         getBoard().resolveAction(
-                new Action<Ped, Entity>(this, null, getBoard(),
-                        new Activity<Ped, Entity>(TargetType.BOARD) {
+                new Action<>(this, null, getBoard(),
+                        new Activity<Ped, Entity>(Activity.TargetType.BOARD) {
 
                             @Override
                             public void act(final Board board,
-                                    final Ped source, final Entity target) {
+                                            final Ped source, final Entity target) {
                                 board.removeMinion(source);
 
                             }
@@ -53,7 +50,7 @@ public abstract class Ped extends Entity implements Damageable {
     private void died() {
         getBoard().resolveAction(
                 new Action<Ped, Entity>(this, null, getBoard(),
-                        new Activity<Ped, Entity>(TargetType.BOARD) {
+                        new Activity<Ped, Entity>(Activity.TargetType.BOARD) {
 
                             @Override
                             public void act(final Board board,
@@ -65,10 +62,7 @@ public abstract class Ped extends Entity implements Damageable {
     }
 
     protected boolean checkForDeath(final int modifiedHealth) {
-        if (modifiedHealth < 1) {
-            return true;
-        }
-        return false;
+        return modifiedHealth < 1;
     }
 
     public abstract void isAttackedBy(final Ped source);
@@ -79,7 +73,7 @@ public abstract class Ped extends Entity implements Damageable {
 
     public void silence(final Entity source) {
         buffs.clear();
-    };
+    }
 
     public void addBuff(final Buff buff) {
         buffs.add(buff);

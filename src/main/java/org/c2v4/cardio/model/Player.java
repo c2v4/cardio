@@ -4,10 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.c2v4.cardio.model.models.Ped;
-import org.c2v4.kardio.action.Action;
+import org.c2v4.cardio.model.action.Action;
+import org.c2v4.cardio.model.action.Activity;
 import org.c2v4.kardio.action.Action.ActionType;
-import org.c2v4.kardio.action.Activity;
 
 import java.util.Set;
 
