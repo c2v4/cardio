@@ -4,15 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.c2v4.cardbot.action.Action;
-import org.c2v4.cardbot.action.Action.ActionType;
-import org.c2v4.cardbot.action.Activity;
-import org.c2v4.cardbot.action.Activity.TargetType;
-import org.c2v4.cardbot.model.Player.Side;
-import org.c2v4.cardbot.model.minions.MinionBase;
-import org.c2v4.cardbot.model.minions.MinionFactory;
-import org.c2v4.cardbot.model.models.Ped;
-import org.c2v4.cardio.model.Player;
+import org.c2v4.cardio.model.*;
+import org.c2v4.cardio.model.action.Action;
 
 import java.util.*;
 
@@ -102,25 +95,25 @@ public class Board extends Entity {
         }
     }
 
-    public <T extends Ped> void addMinion(final MinionBase base,
-                                          final Side side, final T source, final int position) {
-        final Ped toAdd = MinionFactory.createMinion(base, side);
-
-        resolveAction(new Action<T, Ped>(source, toAdd, board,
-                new Activity<T, Ped>(TargetType.BOARD) {
-
-                    @Override
-                    public void act(final Board board, final T source,
-                                    final Ped target) {
-                        if (position < 0) {
-                            board.getMinions().add(target);
-                        } else {
-                            board.getMinions().add(position, target);
-                        }
-                    }
-
-                }, EnumSet.of(ActionType.SUMMON)));
-    }
+//    public <T extends Ped> void addMinion(final MinionBase base,
+//                                          final Side side, final T source, final int position) {
+//        final Ped toAdd = MinionFactory.createMinion(base, side);
+//
+//        resolveAction(new Action<T, Ped>(source, toAdd, board,
+//                new Activity<T, Ped>(Activity.TargetType.BOARD) {
+//
+//                    @Override
+//                    public void act(final Board board, final T source,
+//                                    final Ped target) {
+//                        if (position < 0) {
+//                            board.getMinions().add(target);
+//                        } else {
+//                            board.getMinions().add(position, target);
+//                        }
+//                    }
+//
+//                }, EnumSet.of(Action.ActionType.SUMMON)));
+//    }
 
     private Player getPlayer(final Side side) {
         for (final Player player : players) {
@@ -130,5 +123,8 @@ public class Board extends Entity {
         }
         throw new IllegalStateException("There is no player on " + side
                 + " side");
+    }
+
+    public void removeMinion(Ped source) {
     }
 }

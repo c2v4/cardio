@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.c2v4.cardio.model.action.Action;
-import org.c2v4.cardio.model.action.Activity;
-import org.c2v4.kardio.action.Action.ActionType;
 
 import java.util.Set;
+
+import static org.c2v4.cardio.model.action.Action.ActionType;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -41,10 +41,14 @@ public class Player extends Ped {
     public void useSpecialAbility(final Ped target) {
         final Set<ActionType> actionTypes = clazz.getActionTypes();
         actionTypes.add(ActionType.HERO_POWER);
+        Action action = new Action.Builder<Player, Entity>(getBoard(),
+                clazz.getActivity())
+                .setSource(this)
+                .setTarget(target)
+                .addActionType(clazz.getActionTypes())
+                .addActionType(ActionType.HERO_POWER).build();
         getBoard().resolveAction(
-                new Action<Player, Entity>(this, target, getBoard(),
-                        (Activity<Player, Entity>) clazz.getActivity(),
-                        actionTypes));
+                action);
     }
 
     @Override
@@ -59,8 +63,9 @@ public class Player extends Ped {
         return false;
     }
 
-    public enum Side {
-        PLAYER,
-        OPPONENT
+    @Override
+    public boolean onPlay() {
+        return false;
     }
+
 }

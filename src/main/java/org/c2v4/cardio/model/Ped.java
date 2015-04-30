@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.c2v4.cardio.controller.Board;
-import org.c2v4.cardio.model.Player.Side;
 import org.c2v4.cardio.model.action.Action;
 import org.c2v4.cardio.model.action.Activity;
 import org.c2v4.cardio.model.buffs.Buff;
