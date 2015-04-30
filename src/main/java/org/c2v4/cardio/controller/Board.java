@@ -16,11 +16,11 @@ import java.util.*;
 public class Board extends Entity {
 
     Side turn;
-    private Set<Player> players = new HashSet<Player>();
-    private Set<EventObserver> preExecutors = new HashSet<EventObserver>();
-    private Set<EventObserver> postExecutors = new HashSet<EventObserver>();
-    private Queue<Action<? extends Ped, ? extends Entity>> actions = new LinkedList<Action<? extends Ped, ? extends Entity>>();
-    private List<Ped> minions = new LinkedList<Ped>();
+    private Set<Player> players = new HashSet<>();
+    private Set<EventObserver> preExecutors = new HashSet<>();
+    private Set<EventObserver> postExecutors = new HashSet<>();
+    private Queue<Action<? extends Ped, ? extends Entity>> actions = new LinkedList<>();
+    private List<Ped> minions = new LinkedList<>();
 
     public Board(final Classes player, final Classes opponent,
                  final boolean playerStarts) {
@@ -73,10 +73,10 @@ public class Board extends Entity {
     public void resolveAction(
             final Action<? extends Ped, ? extends Entity> action) {
 
-        actions.add(action);
+        addAction(action);
         boolean toRemove = false;
         for (final EventObserver obs : preExecutors) {
-            if (actions.peek() == action && obs.act(action, this)) {
+            if (obs.act(action, this)) {
                 toRemove = true;
                 break;
 
@@ -87,12 +87,24 @@ public class Board extends Entity {
         } else {
             action.act();
             for (final EventObserver obs : preExecutors) {
-                if (actions.peek() == action && obs.act(action, this)) {
-                    toRemove = true;
+                if (obs.act(action, this)) {
+                    break;
 
                 }
             }
         }
+    }
+
+    public boolean addAction(Action<? extends Ped, ? extends Entity> action) {
+        return actions.add(action);
+    }
+
+    public void addPreExecutor(EventObserver eventObserver) {
+        preExecutors.add(eventObserver);
+    }
+
+    public void removePreExecutor(EventObserver eventObserver) {
+        preExecutors.remove(eventObserver);
     }
 
 //    public <T extends Ped> void addMinion(final MinionBase base,
@@ -126,5 +138,7 @@ public class Board extends Entity {
     }
 
     public void removeMinion(Ped source) {
+
+        //TODO: remove minion method
     }
 }
